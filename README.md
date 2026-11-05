@@ -15,3 +15,9 @@ Problems:
 
 THIS GAME IS NOT MADE BY AI
 i made this by hand by the help of tutorial, although some of the scripts are either fixed or made by ai due to my inexperience.
+
+main tutorials used:
+https://youtu.be/5V9f3MT86M8?si=dwASffRW8G8aiT3u
+https://youtu.be/DfXPWmoHiLs?si=c64orkVKNrgdLSWF
+https://youtu.be/1YqZcpzolOA?si=MBHvvBtTXa70j7ez
+https://youtu.be/zHYkcJyE52g?si=HHvn5CqqceN-ui5o
