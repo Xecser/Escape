@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cqopqlby85bmh"]
+
+[ext_resource type="Script" uid="uid://laya8im7vyox" path="res://main_menu.gd" id="1_i5qic"]
+[ext_resource type="Texture2D" uid="uid://dnw4spa4c3kqc" path="res://Gemini_Generated_Image_6oaswb6oaswb6oas.png" id="2_12kdf"]
+
+[sub_resource type="Theme" id="Theme_2n5pu"]
+
+[node name="MainMenu" type="Node" unique_id=415777048]
+script = ExtResource("1_i5qic")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=180195616]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -693.0
+offset_top = -357.0
+offset_right = 683.0
+offset_bottom = 411.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_12kdf")
+stretch_mode = 1
+
+[node name="Button" type="Button" parent="." unique_id=781414035]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -194.0
+offset_right = 135.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_2n5pu")
+theme_override_font_sizes/font_size = 28
+text = "PLAY"
+
+[node name="Button2" type="Button" parent="." unique_id=1320385617]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -68.0
+offset_right = 68.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_2n5pu")
+theme_override_font_sizes/font_size = 28
+text = "LEVEL 2"
+
+[node name="Button3" type="Button" parent="." unique_id=487659754]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -120.0
+offset_right = 69.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_2n5pu")
+theme_override_font_sizes/font_size = 28
+text = "LEVEL 1"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
