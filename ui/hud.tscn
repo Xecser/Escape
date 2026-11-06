@@ -1,19 +1,25 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cthqrskij05q8"]
 
-[ext_resource type="Script" path="res://ui/hud.gd" id="1_hud"]
-[ext_resource type="Theme" path="res://ui/ui_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://dnoyapgmc4yoj" path="res://ui/hud.gd" id="1_hud"]
+[ext_resource type="Theme" uid="uid://drcn3kuac5yeo" path="res://ui/ui_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" uid="uid://bxs8ptv8htin4" path="res://Orange.png" id="3_orange"]
+[ext_resource type="Texture2D" uid="uid://d13ea84vyecv1" path="res://ui/touch/touch_left.png" id="4_tl"]
+[ext_resource type="Texture2D" uid="uid://cxgx4damg48in" path="res://ui/touch/touch_left_pressed.png" id="5_tlp"]
+[ext_resource type="Texture2D" uid="uid://c261oqantrrpm" path="res://ui/touch/touch_right.png" id="6_tr"]
+[ext_resource type="Texture2D" uid="uid://cy56r23jagnci" path="res://ui/touch/touch_right_pressed.png" id="7_trp"]
+[ext_resource type="Texture2D" uid="uid://cxgwjofv4o0wq" path="res://ui/touch/touch_up.png" id="8_tu"]
+[ext_resource type="Texture2D" uid="uid://drsnjcr2gscmd" path="res://ui/touch/touch_up_pressed.png" id="9_tup"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orange"]
 atlas = ExtResource("3_orange")
 region = Rect2(8, 8, 19, 16)
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=129976804]
 process_mode = 3
 layer = 5
 script = ExtResource("1_hud")
 
-[node name="Root" type="Control" parent="."]
+[node name="Root" type="Control" parent="." unique_id=1418086379]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +29,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_theme")
 
-[node name="PointsBox" type="PanelContainer" parent="Root"]
+[node name="PointsBox" type="PanelContainer" parent="Root" unique_id=1659279778]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 20.0
@@ -32,11 +38,11 @@ offset_right = 160.0
 offset_bottom = 76.0
 mouse_filter = 2
 
-[node name="HBox" type="HBoxContainer" parent="Root/PointsBox"]
+[node name="HBox" type="HBoxContainer" parent="Root/PointsBox" unique_id=11986777]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="OrangeIcon" type="TextureRect" parent="Root/PointsBox/HBox"]
+[node name="OrangeIcon" type="TextureRect" parent="Root/PointsBox/HBox" unique_id=5107259]
 texture_filter = 1
 custom_minimum_size = Vector2(38, 32)
 layout_mode = 2
@@ -45,7 +51,7 @@ texture = SubResource("AtlasTexture_orange")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PointsLabel" type="Label" parent="Root/PointsBox/HBox"]
+[node name="PointsLabel" type="Label" parent="Root/PointsBox/HBox" unique_id=1106128405]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
@@ -53,7 +59,7 @@ theme_override_font_sizes/font_size = 30
 text = "x 0"
 vertical_alignment = 1
 
-[node name="PauseButton" type="Button" parent="Root"]
+[node name="PauseButton" type="Button" parent="Root" unique_id=1909537255]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -69,7 +75,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 28
 text = "II"
 
-[node name="LevelTitle" type="Label" parent="Root"]
+[node name="LevelTitle" type="Label" parent="Root" unique_id=1551363317]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -77,14 +83,190 @@ anchor_right = 1.0
 offset_top = 205.0
 offset_bottom = 285.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 64
 text = "LEVEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseMenu" type="Control" parent="Root"]
+[node name="ControlsHelp" type="PanelContainer" parent="Root" unique_id=12818317]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -230.0
+offset_top = 20.0
+offset_right = 230.0
+offset_bottom = 190.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Margin" type="MarginContainer" parent="Root/ControlsHelp" unique_id=1208171158]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="Root/ControlsHelp/Margin" unique_id=1456359406]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Root/ControlsHelp/Margin/VBox" unique_id=678439364]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 26
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="KeyboardHelp" type="GridContainer" parent="Root/ControlsHelp/Margin/VBox" unique_id=2134123881]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 22
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="Action1" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=661144269]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Move"
+
+[node name="Keys1" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=466158950]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "A / D  or  Left / Right arrows"
+
+[node name="Action2" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=114592647]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Jump"
+
+[node name="Keys2" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=53698278]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Space,  W  or  Up arrow"
+
+[node name="Action3" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=1809964843]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Pause"
+
+[node name="Keys3" type="Label" parent="Root/ControlsHelp/Margin/VBox/KeyboardHelp" unique_id=1499254283]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Esc"
+
+[node name="TouchHelp" type="GridContainer" parent="Root/ControlsHelp/Margin/VBox" unique_id=1172509296]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 22
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="Action1" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=750847595]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Move"
+
+[node name="Keys1" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=542275260]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Left or right buttons"
+
+[node name="Action2" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=1871248101]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Jump"
+
+[node name="Keys2" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=292993084]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Jump button"
+
+[node name="Action3" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=39853360]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
+theme_override_font_sizes/font_size = 22
+text = "Pause"
+
+[node name="Keys3" type="Label" parent="Root/ControlsHelp/Margin/VBox/TouchHelp" unique_id=1905204318]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "II button"
+
+[node name="Tip" type="Label" parent="Root/ControlsHelp/Margin/VBox" unique_id=870316333]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.7, 0.86, 1)
+theme_override_font_sizes/font_size = 18
+text = "You'll figure it out."
+horizontal_alignment = 1
+
+[node name="TouchControls" type="Control" parent="Root" unique_id=172309354]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftPad" type="Control" parent="Root/TouchControls" unique_id=744047951]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="LeftButton" type="TouchScreenButton" parent="Root/TouchControls/LeftPad" unique_id=1044362391]
+texture_filter = 1
+position = Vector2(32, -176)
+scale = Vector2(4, 4)
+texture_normal = ExtResource("4_tl")
+texture_pressed = ExtResource("5_tlp")
+passby_press = true
+action = "left"
+visibility_mode = 1
+
+[node name="RightButton" type="TouchScreenButton" parent="Root/TouchControls/LeftPad" unique_id=616369612]
+texture_filter = 1
+position = Vector2(196, -176)
+scale = Vector2(4, 4)
+texture_normal = ExtResource("6_tr")
+texture_pressed = ExtResource("7_trp")
+passby_press = true
+action = "right"
+visibility_mode = 1
+
+[node name="RightPad" type="Control" parent="Root/TouchControls" unique_id=2122687987]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="JumpButton" type="TouchScreenButton" parent="Root/TouchControls/RightPad" unique_id=1272270977]
+texture_filter = 1
+position = Vector2(-176, -176)
+scale = Vector2(4, 4)
+texture_normal = ExtResource("8_tu")
+texture_pressed = ExtResource("9_tup")
+passby_press = true
+action = "jump"
+visibility_mode = 1
+
+[node name="PauseMenu" type="Control" parent="Root" unique_id=764835491]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -93,7 +275,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dim" type="ColorRect" parent="Root/PauseMenu"]
+[node name="Dim" type="ColorRect" parent="Root/PauseMenu" unique_id=811417953]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,7 +284,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.04, 0.02, 0.08, 0.65)
 
-[node name="Center" type="CenterContainer" parent="Root/PauseMenu"]
+[node name="Center" type="CenterContainer" parent="Root/PauseMenu" unique_id=438217680]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,23 +292,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PausePanel" type="PanelContainer" parent="Root/PauseMenu/Center"]
+[node name="PausePanel" type="PanelContainer" parent="Root/PauseMenu/Center" unique_id=1608169448]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="Root/PauseMenu/Center/PausePanel"]
+[node name="Margin" type="MarginContainer" parent="Root/PauseMenu/Center/PausePanel" unique_id=1262461498]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 18
 
-[node name="VBox" type="VBoxContainer" parent="Root/PauseMenu/Center/PausePanel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Root/PauseMenu/Center/PausePanel/Margin" unique_id=424591170]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="Title" type="Label" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=825785026]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4235, 0.851, 0.9451, 1)
 theme_override_constants/outline_size = 10
@@ -134,33 +316,34 @@ theme_override_font_sizes/font_size = 52
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="Gap" type="Control" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="Gap" type="Control" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=1571470265]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ResumeButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="ResumeButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=973654726]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "Resume"
 
-[node name="RestartButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="RestartButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=366615568]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "Restart Level"
 
-[node name="MenuButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="MenuButton" type="Button" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=1109311605]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "Main Menu"
 
-[node name="Hint" type="Label" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox"]
+[node name="PauseHint" type="Label" parent="Root/PauseMenu/Center/PausePanel/Margin/VBox" unique_id=699156488]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.62, 0.6, 0.78, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 18
-text = "Esc / P to resume"
+text = "Contact on Itch for an issue"
 horizontal_alignment = 1

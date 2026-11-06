@@ -2,10 +2,9 @@ extends Node
 
 
 func _ready() -> void:
-	# Every trip back to the menu starts a fresh run.
 	get_tree().paused = false
 	GameManager.points = 0
-	# Lets you pick a button with the keyboard / controller as well as the mouse.
+	get_tree().quit_on_go_back = true
 	$Buttons/Button.grab_focus()
 
 

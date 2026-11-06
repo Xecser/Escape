@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var required_score: int = 4
-## The scene to load when the player reaches this flag.
+
 @export_file("*.tscn") var next_scene: String = "res://2nd.tscn"
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

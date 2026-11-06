@@ -473,6 +473,7 @@ position = Vector2(4994, 1812)
 
 [node name="HUD" parent="." unique_id=1386204751 instance=ExtResource("8_hud")]
 level_name = "Level 1"
+show_controls = true
 
 [node name="Area2D5" parent="." unique_id=1737909263 instance=ExtResource("4_jormf")]
 position = Vector2(1562, 1027)
@@ -544,11 +545,6 @@ start_direction = 1
 
 [node name="Slime6" parent="." unique_id=479837609 instance=ExtResource("15_y30xl")]
 position = Vector2(4371, 2254)
-speed = 80.0
-start_direction = 1
-
-[node name="Slime7" parent="." unique_id=1306249134 instance=ExtResource("15_y30xl")]
-position = Vector2(2482, 2100)
 speed = 80.0
 start_direction = 1
 

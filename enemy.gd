@@ -1,25 +1,16 @@
 extends CharacterBody2D
-## An enemy that walks back and forth on the ground (or flies, if `flying` is on).
-## Jump on its head to defeat it. Touching it any other way sends the player
-## back to the last checkpoint.
 
 @export var speed: float = 70.0
-## -1 = start walking left, 1 = start walking right.
 @export var start_direction: int = -1
 
 @export_group("Flying")
 @export var flying: bool = false
-## How far a flyer travels from its start position (and back again), in pixels.
 @export var fly_travel: Vector2 = Vector2(240, 0)
-## Small up-and-down wobble while flying, in pixels.
 @export var bob_height: float = 8.0
 
 @export_group("Stomp")
-## Upward speed given to the player after a stomp (held jump = higher bounce).
 @export var stomp_bounce: float = -520.0
-## Points given for defeating this enemy.
 @export var points_for_stomp: int = 1
-## How deep (in pixels) the player's feet may be inside the enemy's head and still count as a stomp.
 @export var stomp_tolerance: float = 22.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -36,7 +27,6 @@ var fly_time := 0.0
 func _ready() -> void:
 	direction = -1 if start_direction < 0 else 1
 	start_position = global_position
-	# The enemy should never physically push the player around; only the hitbox matters.
 	for node in get_tree().get_nodes_in_group("Player"):
 		if node is PhysicsBody2D:
 			add_collision_exception_with(node)
@@ -67,7 +57,6 @@ func _walk(delta: float) -> void:
 			direction = 1 if get_wall_normal().x > 0 else -1
 			_update_ledge_check()
 		elif ledge_check and not ledge_check.is_colliding():
-			# No ground ahead: turn around instead of walking off the edge.
 			direction = -direction
 			_update_ledge_check()
 
@@ -83,7 +72,6 @@ func _fly(delta: float) -> void:
 	if distance <= 0.0:
 		return
 	fly_time += delta
-	# Smooth back-and-forth between start_position and start_position + fly_travel.
 	var angle := fly_time * speed / distance * PI
 	var progress := 0.5 - 0.5 * cos(angle)
 	var bob := sin(fly_time * 5.0) * bob_height
@@ -121,7 +109,6 @@ func _stomped_by(player: CharacterBody2D) -> void:
 
 	var tween := create_tween()
 	if flying:
-		# Flyers drop out of the sky.
 		tween.set_parallel(true)
 		tween.tween_property(self, "global_position:y", global_position.y + 500.0, 0.8).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 		tween.tween_property(self, "modulate:a", 0.0, 0.8)
@@ -137,7 +124,6 @@ func _hurt(player: CharacterBody2D) -> void:
 	if checkpoint_manager and checkpoint_manager.last_location != null:
 		player.global_position = checkpoint_manager.last_location
 	player.velocity = Vector2.ZERO
-	# Quick red flash so it's clear what happened.
 	player.modulate = Color(1, 0.4, 0.4)
 	var tween := player.create_tween()
 	tween.tween_property(player, "modulate", Color.WHITE, 0.4)

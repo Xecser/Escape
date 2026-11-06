@@ -1,9 +1,8 @@
 extends CanvasLayer
-## The in-game HUD (points, pause button, level title) and the pause menu.
-## Pause with Esc, P, the controller Start button, or the pause button in the corner.
 
-## Shown big in the middle of the screen when the level starts. Leave empty for none.
 @export var level_name: String = ""
+@export var show_controls: bool = false
+@export var controls_timeout: float = 20.0
 @export_file("*.tscn") var main_menu_scene: String = "res://Main Menu.tscn"
 
 @onready var points_box: Control = %PointsBox
@@ -15,13 +14,21 @@ extends CanvasLayer
 @onready var resume_button: Button = %ResumeButton
 @onready var restart_button: Button = %RestartButton
 @onready var menu_button: Button = %MenuButton
+@onready var touch_controls: Control = %TouchControls
+@onready var pause_hint: Label = %PauseHint
+@onready var controls_help: Control = %ControlsHelp
+@onready var keyboard_help: Control = %KeyboardHelp
+@onready var touch_help: Control = %TouchHelp
 
 var points_at_level_start := 0
 var shown_points := -1
+var has_moved := false
+var has_jumped := false
+var controls_time := 0.0
+var controls_closing := false
 
 
 func _ready() -> void:
-	# Keep the HUD running while the rest of the game is paused.
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	points_at_level_start = GameManager.points
 	pause_menu.hide()
@@ -31,11 +38,24 @@ func _ready() -> void:
 	menu_button.pressed.connect(go_to_main_menu)
 	_update_points(false)
 	_show_level_title()
+	_setup_controls_help()
+	get_tree().quit_on_go_back = false
+	if DisplayServer.is_touchscreen_available():
+		pause_hint.text = "Tap Resume to keep playing"
 
 
-func _process(_delta: float) -> void:
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if get_tree().paused:
+			resume()
+		else:
+			pause()
+
+
+func _process(delta: float) -> void:
 	if GameManager.points != shown_points:
 		_update_points(true)
+	_update_controls_help(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -65,6 +85,9 @@ func pause() -> void:
 	get_tree().paused = true
 	pause_menu.show()
 	pause_button.hide()
+	touch_controls.hide()
+	for action in ["left", "right", "jump"]:
+		Input.action_release(action)
 	resume_button.grab_focus()
 	# Small pop-in animation.
 	pause_panel.pivot_offset = pause_panel.size / 2.0
@@ -79,6 +102,7 @@ func resume() -> void:
 	get_tree().paused = false
 	pause_menu.hide()
 	pause_button.show()
+	touch_controls.show()
 
 
 func restart_level() -> void:
@@ -113,3 +137,30 @@ func _show_level_title() -> void:
 	tween.tween_interval(1.4)
 	tween.tween_property(level_title, "modulate:a", 0.0, 0.6)
 	tween.tween_callback(level_title.hide)
+
+
+func _setup_controls_help() -> void:
+	if not show_controls:
+		controls_help.hide()
+		return
+	var touch := DisplayServer.is_touchscreen_available()
+	keyboard_help.visible = not touch
+	touch_help.visible = touch
+	controls_help.modulate.a = 0.0
+	create_tween().tween_property(controls_help, "modulate:a", 1.0, 0.5).set_delay(0.4)
+
+
+func _update_controls_help(delta: float) -> void:
+	if not controls_help.visible or controls_closing or get_tree().paused:
+		return
+	controls_time += delta
+	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		has_moved = true
+	if Input.is_action_pressed("jump"):
+		has_jumped = true
+	if (has_moved and has_jumped) or controls_time > controls_timeout:
+		controls_closing = true
+		var tween := create_tween()
+		tween.tween_interval(1.5)
+		tween.tween_property(controls_help, "modulate:a", 0.0, 0.6)
+		tween.tween_callback(controls_help.hide)
